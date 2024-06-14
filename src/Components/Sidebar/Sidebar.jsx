@@ -11,13 +11,11 @@ const Sidebar = () => {
         extend ? "w-64" : "w-20"
       }`}
     >
-
-      
       {/* Topbar */}
       <div>
         <img
           onClick={() => setExtend((prev) => !prev)}
-          className="w-6 block ml-2 cursor-pointer"
+          className="w-7 block ml-1 cursor-pointer"
           src={assets.menu_icon}
           alt=""
         />
@@ -39,19 +37,19 @@ const Sidebar = () => {
       </div>
 
       {/* BottomBar */}
-      <div className="flex flex-col">
+      <div className="flex flex-col  -mx-3.5">
         <div className="bottom-item recent-entry flex items-start gap-3 p-3 pr-10 rounded-[50px] text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
-          <img className="w-6" src={assets.question_icon} alt="" />
+          <img className="w-8" src={assets.question_icon} alt="" />
           <p
             className={`transition-opacity duration-500 ${
-              extend ? "opacity-100" : "opacity-0"
+              extend ? "opacity-100" : "opacity-0  "
             }`}
           >
             Help
           </p>
         </div>
         <div className="bottom-item recent-entry flex items-start gap-3 p-3 pr-10 rounded-[50px] text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
-          <img className="w-6" src={assets.history_icon} alt="" />
+          <img className="w-8" src={assets.history_icon} alt="" />
           <p
             className={`transition-opacity duration-500 ${
               extend ? "opacity-100" : "opacity-0"
@@ -61,7 +59,7 @@ const Sidebar = () => {
           </p>
         </div>
         <div className="bottom-item recent-entry flex items-start gap-3 p-3 pr-10 rounded-[50px] text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
-          <img className="w-6" src={assets.setting_icon} alt="" />
+          <img className="w-8" src={assets.setting_icon} alt="" />
           <p
             className={`transition-opacity duration-500 ${
               extend ? "opacity-100" : "opacity-0"
