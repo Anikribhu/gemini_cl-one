@@ -7,7 +7,7 @@ const Sidebar = () => {
     
   return (
     // Sidebar
-    <div className={`sidebar min-h-[100vh] inline-flex px-4 py-4 flex-col justify-between bg-[#f0f4f9] font-custom transition-all duration-500 ${extend ? 'w-64' : 'w-20'}`}>
+    <div className={`sidebar max-sm:invisible max-h-[100vh] inline-flex px-4 py-4 flex-col justify-between bg-[#f0f4f9] font-custom transition-all duration-500 ${extend ? 'w-64' : 'w-20'}`}>
 
 
 
@@ -16,7 +16,7 @@ const Sidebar = () => {
             <img onClick={()=>setExtend(prev=>!prev)} className='w-6 block ml-2 cursor-pointer' src={assets.menu_icon} alt="" />
             {/* New-Chat */}
             <div className=' mt-12 inline-flex items-center gap-3 px-4 py-3 bg-[#dde1e7] hover:text-gray-700 cursor-pointer rounded-[50px] text-base text-gray-500'>
-                <img className=' w-5' src={assets.plus_icon} alt="" />
+                <img className='w-5' src={assets.plus_icon} alt="" />
                 {extend?<p className=''>New Chat</p>:null}
             </div>
             {/* Recent */}
