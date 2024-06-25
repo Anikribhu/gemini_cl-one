@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../../assets/assets";
+import { Context } from "../../context/Context";
 
 const Main = () => {
 
   // Typing Effect
   const [text, setText] = useState("");
   const message = "Hello, Dev.";
-  const typingSpeed = 120;
+  const typingSpeed = 100;
 
   useEffect(() => {
     let currentIndex = 0;
@@ -28,6 +29,11 @@ const Main = () => {
 
 
 
+  const {onSent,recentPrompt,showResult,loading,resultData,setInput,input,handleKeyPress} = useContext(Context)
+
+
+
+
   return (
     // Main
     <div className="font-custom flex-1 min-h-[100vh] pb-[15vh] relative max-sm:absolute">
@@ -38,7 +44,10 @@ const Main = () => {
       </div>
       {/* Main-Container */}
       <div className="main-container max-w-[900px]  m-auto ">
-        <div className="greet p-2 mx-3  pb-10 mt-10 max-sm:text-5xl text-7xl text-[#c4c7c5] font-medium">
+
+      {!showResult ?
+        <>
+           <div className="greet p-2 mx-3  pb-10 mt-10 max-sm:text-5xl text-7xl text-[#c4c7c5] font-medium">
           <p>
             <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-fade-in-left">
               {text}
@@ -88,14 +97,42 @@ const Main = () => {
             />
           </div>
         </div>
+        </>
+        :<div className="result max-sm:px-5 px-0 py-[5%] max-h-[70vh] overflow-y-scroll no-scrollbar ">
+          <div className="result-title mx-10 max-sm:mr-4 my-0 pb-10 flex justify-end items-center gap-5">
+            <p className="">{recentPrompt}</p>
+            <img className="w-11 rounded-full" src={assets.user_icon} alt="" />
+          </div>
+          <div className="result-data flex items-start gap-5">
+          <img className="w-11 rounded-full" src={assets.gemini_icon} alt="" />
+            {loading ? 
+            <>
+              <div className=" w-[100%] flex flex-col gap-3">
+                <hr className="animate-loader-linear rounded-md border-none bg-[#f6f7f8] bg-gradient-to-r from-[#9ed7ff] via-[#ffffff] to-[#9ed7ff] bg-[length:800px_50px] h-5" />
+                <hr className="animate-loader-linear rounded-md border-none bg-[#f6f7f8] bg-gradient-to-r from-[#9ed7ff] via-[#ffffff] to-[#9ed7ff] bg-[length:800px_50px] h-5" />
+                <hr className="animate-loader-linear rounded-md border-none bg-[#f6f7f8] bg-gradient-to-r from-[#9ed7ff] via-[#ffffff] to-[#9ed7ff] bg-[length:800px_50px] h-5" />
+              </div>
+            </>:
+            <>
+            <p dangerouslySetInnerHTML={{__html:resultData}} ></p>
+            </>
+            }
+          </div>
+        </div>
+        
+        
+      }
+
+       
         {/* Main-Bottom */}
         <div className="main-bottom max-sm:py-1 absolute bottom-0 w-full max-w-[900px] px-0 py-5 m-auto max-sm:px-3 max-sm: max-sm:max-w-full">
           <div className="search flex justify-between items-center gap-5 bg-[#f0f4f9] px-3 p-4 shadow-md max-sm:py-1  mb-1 rounded-[50px]">
-            <input className="flex-1 bg-transparent outline-none border-none p-2 text-lg" type="text" placeholder="Enter a prompt Here" />
+            <input value={input} onChange={(e) => setInput(e.target.value)} 
+                onKeyPress={handleKeyPress}  className="flex-1 bg-transparent outline-none border-none p-2 text-lg" type="text" placeholder="Enter a prompt Here" />
             <div className="flex gap-3 items-center max-sm:gap-1">
               <img className=" w-6 cursor-pointer" src={assets.gallery_icon} alt="" />
               <img className=" w-6 cursor-pointer" src={assets.mic_icon} alt="" />
-              <img className=" w-6 cursor-pointer" src={assets.send_icon} alt="" />
+              <img onClick={()=>onSent()}   className=" w-6 cursor-pointer" src={assets.send_icon} alt="" />
             </div>
           </div>
           <p className="info mx-4 font-light text-center my-0 text-[14px]">

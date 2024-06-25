@@ -58,8 +58,10 @@ const Sidebar = () => {
             Activity
           </p>
         </div>
-        <div className="bottom-item recent-entry flex items-start gap-3 p-3 pr-10 rounded-[50px] text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
-          <img className="w-8" src={assets.setting_icon} alt="" />
+        <div className="bottom-item recent-entry flex items-center gap-3 p-3 pr-10 rounded-[50px] text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
+          <img className={`w-8 ${
+              extend ? "w-8" : "w-10"
+            }`} src={assets.setting_icon} alt="" />
           <p
             className={`transition-opacity duration-500 ${
               extend ? "opacity-100" : "opacity-0"
