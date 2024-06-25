@@ -100,7 +100,7 @@ const Main = () => {
         </>
         :<div className="result max-sm:px-5 px-0 py-[5%] max-h-[70vh] overflow-y-scroll no-scrollbar ">
           <div className="result-title mx-10 max-sm:mr-4 my-0 pb-10 flex justify-end items-center gap-5">
-            <p className="">{recentPrompt}</p>
+            <p className="text-lg leading-7 font-semibold">{recentPrompt}</p>
             <img className="w-11 rounded-full" src={assets.user_icon} alt="" />
           </div>
           <div className="result-data flex items-start gap-5">
@@ -114,7 +114,7 @@ const Main = () => {
               </div>
             </>:
             <>
-            <p dangerouslySetInnerHTML={{__html:resultData}} ></p>
+            <p className="text-lg leading-7 font-normal" dangerouslySetInnerHTML={{__html:resultData}} ></p>
             </>
             }
           </div>
@@ -125,8 +125,8 @@ const Main = () => {
 
        
         {/* Main-Bottom */}
-        <div className="main-bottom max-sm:py-1 absolute bottom-0 w-full max-w-[900px] px-0 py-5 m-auto max-sm:px-3 max-sm: max-sm:max-w-full">
-          <div className="search flex justify-between items-center gap-5 bg-[#f0f4f9] px-3 p-4 shadow-md max-sm:py-1  mb-1 rounded-[50px]">
+        <div className="main-bottom max-sm:py-1 absolute bottom-0 max-sm:relative max-sm:top-[10vh]  w-full max-w-[900px] px-0 py-5 m-auto max-sm:px-3 max-sm: max-sm:max-w-full">
+          <div className="search flex justify-between items-center max-sm:gap-1 gap-5 bg-[#f0f4f9] px-3 p-4 shadow-md max-sm:py-1  mb-1 rounded-[50px]">
             <input value={input} onChange={(e) => setInput(e.target.value)} 
                 onKeyPress={handleKeyPress}  className="flex-1 bg-transparent outline-none border-none p-2 text-lg" type="text" placeholder="Enter a prompt Here" />
             <div className="flex gap-3 items-center max-sm:gap-1">

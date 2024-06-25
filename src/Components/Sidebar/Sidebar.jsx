@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
+import { Context } from "../../context/Context";
 
 const Sidebar = () => {
   const [extend, setExtend] = useState(false);
+  const {onSent,prevPrompt,setRecentPrompt} = useContext(Context)
 
   return (
     // Sidebar
@@ -28,10 +30,15 @@ const Sidebar = () => {
         {extend ? (
           <div className="flex flex-col">
             <p className=" mt-7 mb-5">Recent</p>
+            {prevPrompt.map((item,index)=>{
+                return (
+
             <div className="recent-entry  flex items-start gap-3 p-3 pr-10 rounded-[50px] text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
               <img className=" w-5" src={assets.message_icon} alt="" />
-              <p>What is react ....</p>
+              <p>{item.slice(0,18)}....</p>
             </div>
+                )
+            })}
           </div>
         ) : null}
       </div>
