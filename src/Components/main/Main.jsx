@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef  } from "react";
 import { assets } from "../../assets/assets";
 import { Context } from "../../context/Context";
 
@@ -6,8 +6,8 @@ const Main = () => {
 
   // Typing Effect
   const [text, setText] = useState("");
-  const message = "Hello, Dev.";
-  const typingSpeed = 100;
+  const message = "Hello,Dev.";
+  const typingSpeed = 200;
 
   useEffect(() => {
     let currentIndex = 0;
@@ -27,11 +27,19 @@ const Main = () => {
     return () => clearTimeout();
   }, []);
 
+  const textRef = useRef();
+
+  const handleClick = () => {
+    const text = textRef.current.innerText;
+    onSent(text);
+  };
 
 
   const {onSent,recentPrompt,showResult,loading,resultData,setInput,input,handleKeyPress} = useContext(Context)
 
-
+  const loadPrompt = async(prompt)=>{
+    await onSent(prompt);
+  }
 
 
   return (
@@ -55,8 +63,8 @@ const Main = () => {
           </p>
           <p className="mt-3">How can I help you today?</p>
         </div>
-        <div className="cards grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 p-5">
-          <div className="card h-52  p-4 transition-transform duration-500 transform hover:scale-110 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
+        <div   className="cards grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 p-5">
+          <div   className="card h-52  p-4 transition-transform duration-500 transform hover:scale-110 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
             <p className="text-[#585858] text-lg">
               Suggest beautiful places to see on an upcoming road trip
             </p>
@@ -66,7 +74,7 @@ const Main = () => {
               alt=""
             />
           </div>
-          <div className="card transition-transform duration-500 transform hover:scale-110 h-52 p-4 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
+          <div  className="card transition-transform duration-500 transform hover:scale-110 h-52 p-4 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
             <p className="text-[#585858] text-lg">
               Breifly summerize this concept: Urban Planning
             </p>
@@ -76,7 +84,7 @@ const Main = () => {
               alt=""
             />
           </div>
-          <div className="card transition-transform duration-500 transform hover:scale-110 h-52 p-4 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
+          <div  className="card transition-transform duration-500 transform hover:scale-110 h-52 p-4 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
             <p className="text-[#585858] text-lg">
               Brainstrom team bonding activities for our work retreat
             </p>
@@ -86,7 +94,7 @@ const Main = () => {
               alt=""
             />
           </div>
-          <div className="card transition-transform duration-500 transform hover:scale-110 h-52 p-4 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
+          <div  className="card transition-transform duration-500 transform hover:scale-110 h-52 p-4 hover:bg-[#dfe4ea] bg-[#f0f4f9] relative rounded-2xl cursor-pointer shadow-xl">
             <p className="text-[#585858] text-lg">
               Improve the readability of the following code.
             </p>
@@ -125,14 +133,14 @@ const Main = () => {
 
        
         {/* Main-Bottom */}
-        <div className="main-bottom max-sm:py-1 absolute bottom-0 max-sm:relative max-sm:top-[10vh]  w-full max-w-[900px] px-0 py-5 m-auto max-sm:px-3 max-sm: max-sm:max-w-full">
-          <div className="search flex justify-between items-center max-sm:gap-1 gap-5 bg-[#f0f4f9] px-3 p-4 shadow-md max-sm:py-1  mb-1 rounded-[50px]">
+        <div className="main-bottom max-sm:py-1 absolute bottom-0 max-sm:relative max-sm:top-[10vh]  w-full max-w-[900px] px-0 py-5 m-auto max-sm:px-3  max-sm:max-w-full">
+          <div className="search flex justify-between items-center max-sm:gap-1 gap-5 bg-[#f0f4f9] px-3 p-4 shadow-md max-sm:py-2 max-sm:px-1  mb-1 rounded-[50px]">
             <input value={input} onChange={(e) => setInput(e.target.value)} 
-                onKeyPress={handleKeyPress}  className="flex-1 bg-transparent outline-none border-none p-2 text-lg" type="text" placeholder="Enter a prompt Here" />
+                onKeyPress={handleKeyPress}  className="flex-1 bg-transparent outline-none max-sm:flex-none  border-none p-2 text-lg" type="text" placeholder="Enter a prompt Here" />
             <div className="flex gap-3 items-center max-sm:gap-1">
-              <img className=" w-6 cursor-pointer" src={assets.gallery_icon} alt="" />
-              <img className=" w-6 cursor-pointer" src={assets.mic_icon} alt="" />
-              <img onClick={()=>onSent()}   className=" w-6 cursor-pointer" src={assets.send_icon} alt="" />
+              <img className=" w-6 max-sm:w-5 cursor-pointer" src={assets.gallery_icon} alt="" />
+              <img className=" w-6 max-sm:w-5 cursor-pointer" src={assets.mic_icon} alt="" />
+              <img onClick={()=>onSent()}   className=" w-6 max-sm:w-5 cursor-pointer" src={assets.send_icon} alt="" />
             </div>
           </div>
           <p className="info mx-4 font-light text-center my-0 text-[14px]">
